@@ -1,0 +1,38 @@
+---
+name: "rstcheck"
+
+on:
+  pull_request:
+    branches: [master]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    container: ghcr.io/staticrocket/psdk-doc-docker:latest
+    permissions:
+      contents: read
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run rstcheck
+        run: |
+          git config --global --add safe.directory $PWD
+          bin/delta.sh -a $GITHUB_BASE_REF -b $GITHUB_REF -- rstcheck -r source/
+          echo "new_warnings="$(cat _new-warn.log)""_new-warn.log >> $GITHUB_ENV
+
+      - name: Update pr with info
+        uses: actions/github-script@v7
+        if: failure()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              issue_number: context.issue.number,
+              repo: context.repo.repo,
+              body: process.env.new_warnings
+            })
