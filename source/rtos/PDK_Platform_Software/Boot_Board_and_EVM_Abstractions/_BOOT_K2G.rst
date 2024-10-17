@@ -140,6 +140,7 @@ Booting via SD Card
 
 | Below is an example of K2G SBL successfully booting the diagnostic
   application:
+
 .. Image:: ../images/K2g_boot_diag.jpg
 
 QSPI Boot Mode
