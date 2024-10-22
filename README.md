@@ -92,3 +92,5 @@ Add the following to your `init.vim` to automatically use the standard
 whitespace values for RST files:
 
     autocmd FileType rst set tabstop=3 shiftwidth=3 expandtab
+
+test
