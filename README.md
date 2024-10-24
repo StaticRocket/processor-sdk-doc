@@ -15,7 +15,7 @@ OR you can use a docker container like the following:
 
 ### Clone the Git Repo
 
-    $ git clone ssh://git@bitbucket.itg.ti.com/processor-sdk/processor-sdk-doc.git
+    $ git clone https://github.com/TexasInstruments/processor-sdk-doc.git
 
 ### Build on Ubuntu
 
