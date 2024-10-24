@@ -92,9 +92,10 @@ Software Stack of Accelerated Codec Encoding/Decoding
 As shown in the figures below, the software stack of the accelerated
 encoding and decoding has two parts:
 
-        -  A V4L2 (Video4Linux version 2) software driver running as part of Linux
-        on the A72 MPU subsystem
-        -  The firmware running on the DECODER and ENCODER
+   - A V4L2 (Video4Linux version 2) software driver running as part of Linux on
+     the A72 MPU subsystem
+
+   - The firmware running on the DECODER and ENCODER
 
 The driver communicates with the firmware running on the ENCODER/DECODER
 through its own IPC (inter-processor communication).
