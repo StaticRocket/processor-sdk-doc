@@ -50,7 +50,7 @@ Released August 2024
       * SYSFW: v10.00.08
       * DM: 10.00.00.08
   * Important Bug and Stability fixes on top of 9.2 Release
-  ** Review Issue Tracker Section for the new fixes.
+      * Review Issue Tracker Section for the new fixes.
 
 
 Build Information
