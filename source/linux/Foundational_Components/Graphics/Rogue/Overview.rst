@@ -5,6 +5,10 @@
 Introduction
 ############
 
+A gneral spelling mistake.
+
+Annother one.
+
 .. ifconfig:: CONFIG_gpu_ip in ('Rogue_8XE')
 
    |__PART_FAMILY_DEVICE_NAMES__| device is enabled with 3D graphics
