@@ -3,12 +3,23 @@ name: "vale"
 
 on: [pull_request]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   vale:
     name: vale
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/staticrocket/processor-sdk-doc:latest
+      options: --entrypoint /bin/bash
 
     steps:
+      - name: Prepare GitHub workdir
+        run: |
+          mkdir -p /github/home/
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -19,9 +30,6 @@ jobs:
           files: |
             **.rst
             **.md
-
-      - name: Install docutils
-        run: sudo apt-get install -y docutils
 
       - name: Run vale checks
         uses: errata-ai/vale-action@v2.1.1
