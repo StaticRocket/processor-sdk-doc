@@ -32,7 +32,8 @@ jobs:
             **.md
 
       - name: Run vale checks
-        uses: errata-ai/vale-action@v2.1.1
+        uses: StaticRocket/vale-action@e87d7c8fbd6eaa6daf32ec2df81e8c060893b9ff
         with:
           fail_on_error: true
           files: ${{ steps.changed-files.outputs.all_changed_files }}
+          version: none
