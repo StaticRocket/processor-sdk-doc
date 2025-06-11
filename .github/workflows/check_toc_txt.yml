@@ -1,5 +1,5 @@
 ---
-name: "check_toc_txt.py"
+name: "check_toc_txt"
 
 on:
   pull_request:
