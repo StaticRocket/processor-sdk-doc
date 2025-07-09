@@ -23,36 +23,7 @@ jobs:
           run-id: ${{ github.event.workflow_run.id }}
 
       - name: Generate root index
-        run: |
-          cat << EOF > build/index.html
-          <!DOCTYPE html>
-          <html lang="en">
-            <head>
-              <meta charset="utf-8">
-              <title>PSDK Documentation Landing Page</title>
-            </head>
-            <body>
-              <main>
-                <h1>PSDK Documentation Landing Page</h1>
-                <ul>
-          EOF
-
-          for path in build/*/; do
-            root_index=$(find "$path" -name index.html -print -quit)
-            if [ -n "$root_index" ]; then
-              text=$(basename "$path")
-              relative_path=$(realpath "$root_index" --relative-to=build)
-              printf '        <li><a href="%s">%s</a></li>\n' \
-                "$relative_path" "$text" >> build/index.html
-            fi
-          done
-
-          cat << EOF >> build/index.html
-                </ul>
-              </main>
-            </body>
-          </html>
-          EOF
+        run: ./bin/root_index.py
 
       - name: Upload static files as single artifact
         uses: actions/upload-pages-artifact@v3
