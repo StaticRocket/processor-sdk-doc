@@ -53,6 +53,9 @@ I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) source
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
 	@echo "  html       to make standalone HTML files"
+	@echo "  clean      to remove the build directory and generated files"
+	@echo "  lint       to run rstcheck to verify RST syntax"
+	@echo "  deploy     to remove any temporary files from the build"
 
 clean:
 	rm -rf "$(BUILDDIR)"
@@ -60,7 +63,10 @@ clean:
 lint:
 	rstcheck -r "$(SOURCEDIR)"
 
-html: 
+html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) "$(SOURCEDIR)" "$(BUILDDIR)"
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)."
+
+deploy:
+	rm -rf "$(BUILDDIR)/doctrees"
