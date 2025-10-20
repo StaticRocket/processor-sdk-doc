@@ -16,6 +16,7 @@ jobs:
     container:
       image: ghcr.io/texasinstruments/processor-sdk-doc:latest
       options: --entrypoint /bin/bash
+    permissions: {}
 
     steps:
       - name: Checkout
