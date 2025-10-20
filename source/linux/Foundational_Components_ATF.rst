@@ -8,7 +8,7 @@ Trusted Firmware-A (TF-A) provides a reference implementation of secure world
 software for Armv7-A and Armv8-A, including a Secure Monitor executing at
 Exception Level 3 (EL3).
 
-Arm Trusted Firmware (ATF) is the initial code on ARMv8-A cores for all K3 platforms.
+Arm Trusted Firmware (ATF) is the intial code on ARMv8-A cores for all K3 platforms.
 After setting up the initial core state and applying any needed errata fixes
 it sets up itself as the EL3 monitor handler. Following that, it installs the secure
 world open source Trusted Execution Environment (OP-TEE) software and passes execution
