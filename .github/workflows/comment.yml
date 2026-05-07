@@ -3,19 +3,6 @@ name: "comment"
 
 on:  # yamllint disable-line rule:truthy
   workflow_call:
-    inputs:
-      issue_number:
-        description: "PR / Issue number to comment on"
-        required: true
-        type: number
-      problem_count:
-        description: "Number of problems detected"
-        required: true
-        type: number
-      summary:
-        description: "Text summary that will be posted"
-        required: true
-        type: string
 
 permissions:
   pull-requests: write  # Required to leave a comment on a review
@@ -29,18 +16,15 @@ jobs:
     steps:
       - name: Update pr with info from other runners
         uses: actions/github-script@v7
-        env:
-          ISSUE_NUMBER: ${{ inputs.issue_number }}
-          PROBLEM_COUNT: ${{ inputs.problem_count }}
-          SUMMARY: ${{ inputs.summary }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { env } = require('node:process');
-
-            var issue_number = Number(env.ISSUE_NUMBER);
-            var problem_count = Number(env.PROBLEM_COUNT);
-            var summary = String(env.SUMMARY);
+            var fs = require('fs');
+            var issue_number = Number(fs.readFileSync('./results/id'));
+            var problem_count = Number(fs.readFileSync(
+              './results/problem-count'
+            ));
+            var summary = String(fs.readFileSync('./results/summary'));
 
             if (problem_count > 0) {
               github.rest.issues.createComment({

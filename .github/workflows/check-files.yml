@@ -61,11 +61,11 @@ jobs:
             echo "No new unreachable files found with check_files.py"
           fi >> "$GITHUB_STEP_SUMMARY"
 
-          # Prepare the output
-          SUMMARY=$(< "$GITHUB_STEP_SUMMARY")
-          echo "issue_number=$EVENT_NUMBER" >> "$GITHUB_OUTPUT"
-          echo "problem_count=$WARNING_COUNT" >> "$GITHUB_OUTPUT"
-          echo "summary=$SUMMARY" >> "$GITHUB_OUTPUT"
+          # Prepare the artifacts
+          mkdir -p ./results
+          echo "$EVENT_NUMBER" > ./results/id
+          cp "$GITHUB_STEP_SUMMARY" ./results/summary
+          echo "$(wc -l < _new-warn.log)" > ./results/problem-count
 
           # Exit with error if there are new warnings
           [ "$WARNING_COUNT" -eq "0" ]
@@ -73,7 +73,3 @@ jobs:
       - name: Comment
         uses: ./.github/workflows/comment.yml
         if: always()
-        with:
-          issue_number: ${{ steps.check.outputs.issue_number }}
-          problem_count: ${{ steps.check.outputs.problem_count }}
-          summary: ${{ steps.check.outputs.summary }}
