@@ -26,6 +26,9 @@ jobs:
       image: ghcr.io/texasinstruments/processor-sdk-doc:latest
       options: --entrypoint /bin/bash
 
+    permissions:
+      pull-requests: write
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
