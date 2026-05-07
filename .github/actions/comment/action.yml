@@ -1,6 +1,10 @@
 ---
 name: "comment"
 description: "Comment on a given pull request or issue"
+inputs:
+  token:
+    description: "A token with pull request or issue write permission"
+    required: true
 
 runs:
   using: "composite"
@@ -9,7 +13,7 @@ runs:
       uses: actions/github-script@v7
       if: ${{ github.event.workflow_run.event == 'pull_request' }}
       with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
+        github-token: ${{ inputs.token }}
         script: |
           var fs = require('fs');
           var issue_number = Number(fs.readFileSync('./results/id'));
