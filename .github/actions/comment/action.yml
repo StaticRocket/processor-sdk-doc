@@ -13,7 +13,6 @@ runs:
       uses: actions/github-script@v7
       with:
         github-token: ${{ inputs.token }}
-        if: always()
         script: |
           var fs = require('fs');
           var issue_number = Number(fs.readFileSync('./results/id'));

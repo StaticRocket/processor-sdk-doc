@@ -75,5 +75,6 @@ jobs:
 
       - name: Comment
         uses: ./.github/actions/comment
+        if: always()
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
