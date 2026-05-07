@@ -71,5 +71,5 @@ jobs:
           [ "$WARNING_COUNT" -eq "0" ]
 
       - name: Comment
-        uses: ./.github/workflows/comment.yml
+        uses: ./.github/actions/comment
         if: always()
