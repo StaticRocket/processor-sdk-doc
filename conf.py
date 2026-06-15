@@ -40,7 +40,7 @@ extensions = [
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
     'sphinx.ext.graphviz',
-    'sphinx_rtd_theme',
+    'pydata_sphinx_theme',
     'sphinx_design',
     'sphinx_copybutton'
 ]
@@ -106,12 +106,21 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_rtd_theme'
+html_theme = 'pydata_sphinx_theme'
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-html_theme_options = {}
+html_theme_options = {
+    "use_edit_page_button": True,
+    "primary_sidebar_end": ["indices.html"],
+    "shorten_urls": False,
+    "logo": {
+        "image_light": "_static/ti_stk_2c_pos_rgb.svg",
+        "image_dark": "_static/ti_stk_1c_rev_rgb.svg",
+    },
+    "show_nav_level": 2,
+}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []
@@ -119,19 +128,16 @@ html_theme_options = {}
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
 
-# The name of an image file (relative to this directory) to place at the top
-# of the sidebar.
-html_logo = rootdir + '_static/img/ti_logo.png'
-
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-html_favicon = rootdir + '_static/img/favicon.ico'
+html_favicon = '_static/favicon.ico'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = [rootdir + '_static']
+html_static_path = ['_static']
+html_css_files = ['css/custom.css']
 
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
@@ -145,10 +151,6 @@ html_last_updated_fmt = '%b %d, %Y'
 # If true, SmartyPants will be used to convert quotes and dashes to
 # typographically correct entities.
 #html_use_smartypants = True
-
-# Custom sidebar templates, maps document names to template names.
-html_sidebars = { '**': ['globaltoc.html', 'relations.html', 'sourcelink.html',
-                         'searchbox.html'], }
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -199,11 +201,10 @@ html_search_scorer = ''
 
 # Read the Docs specific parameters for the "Edit on GitHub" button
 html_context = {
-    "display_github": True,
     "github_user": "texasinstruments",
     "github_repo": "processor-sdk-doc",
     "github_version": "master",
-    "conf_py_path": "/source/",
+    "doc_path": "source/",
 }
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -287,10 +288,6 @@ def setup(app):
     """
     Sphinx application entrypoint
     """
-
-    # Load overrides
-    app.add_css_file("css/theme_overrides.css")
-
     print("Build setup: Filled Replacement Variables (family_replacevars)"
             "and Configuration Values (family_configvals) hash tables")
     print("family_replacevars = ")

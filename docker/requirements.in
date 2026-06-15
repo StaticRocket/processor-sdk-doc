@@ -5,4 +5,4 @@ rstcheck-core @ git+https://github.com/StaticRocket/rstcheck-core.git@d935498cfc
 Sphinx>=8.2.3
 sphinx-copybutton>=0.5.2
 sphinx_design>=0.7.0
-sphinx-rtd-theme>=3.0.2
+pydata-sphinx-theme>=0.19.0
