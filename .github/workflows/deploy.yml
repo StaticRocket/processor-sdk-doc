@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     container:
-      image: ghcr.io/texasinstruments/processor-sdk-doc:latest
+      image: ghcr.io/${{ vars.CONTAINER_NAME }}:latest
       options: --entrypoint /bin/bash
     permissions:
       contents: read

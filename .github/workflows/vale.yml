@@ -12,7 +12,7 @@ jobs:
     name: vale
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/staticrocket/processor-sdk-doc:latest
+      image: ghcr.io/${{ vars.CONTAINER_NAME }}:latest
       options: --entrypoint /bin/bash
     permissions:
       contents: read
