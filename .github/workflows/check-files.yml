@@ -7,9 +7,16 @@ on:  # yamllint disable-line rule:truthy
     paths:
       - 'source/**'
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number }}
+  cancel-in-progress: true
+
 defaults:
   run:
     shell: bash
+
+permissions:
+  contents: read
 
 jobs:
   lint:
@@ -18,12 +25,15 @@ jobs:
     container:
       image: ghcr.io/${{ vars.CONTAINER_NAME }}:latest
       options: --entrypoint /bin/bash
+
     permissions:
-      contents: read
+      pull-requests: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       - name: Update refs and settings
         run: |
@@ -33,6 +43,9 @@ jobs:
           git switch master
 
       - name: Run check_files.py
+        id: check
+        env:
+          EVENT_NUMBER: ${{ github.event.number }}
         run: |
           # Disable color output
           export NO_COLOR=true
@@ -53,17 +66,15 @@ jobs:
 
           # Prepare the artifacts
           mkdir -p ./results
-          echo "${{ github.event.number }}" > ./results/id
+          echo "$EVENT_NUMBER" > ./results/id
           cp "$GITHUB_STEP_SUMMARY" ./results/summary
           echo "$(wc -l < _new-warn.log)" > ./results/problem-count
 
           # Exit with error if there are new warnings
           [ "$WARNING_COUNT" -eq "0" ]
 
-      - name: Save results
-        uses: actions/upload-artifact@v4
+      - name: Comment
+        uses: ./.github/actions/comment
         if: always()
         with:
-          name: results
-          path: results/
-          retention-days: 1
+          token: ${{ secrets.GITHUB_TOKEN }}
