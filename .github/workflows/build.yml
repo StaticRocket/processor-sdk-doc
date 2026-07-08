@@ -61,7 +61,7 @@ jobs:
           make VERSION=${GITHUB_REF_NAME}
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
         with:
           name: ${{ matrix.device }}-${{ matrix.os }}
           path: build/
