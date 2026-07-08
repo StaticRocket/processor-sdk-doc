@@ -27,7 +27,7 @@ jobs:
       build-matrix: "${{ steps.matrix.outputs.matrix }}"
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
 
@@ -49,13 +49,9 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
         with:
           persist-credentials: false
-
-      - name: Add directory to safe dir overrides
-        run: |
-          git config --global --add safe.directory "$PWD"
 
       - name: Build ${{ matrix.device }}
         env:
